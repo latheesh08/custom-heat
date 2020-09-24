@@ -1,0 +1,159 @@
+.details_button_2{
+    width: 100px;
+    height: 30px;
+    border: 1px solid #E0E0E0;
+    // background: rgba(17, 60, 78, 0.5);
+    background-color: #113C4E;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+}
+.description_area{
+    background: #FFFFFF;
+opacity: 0.8;
+border: 1px solid #505B65;
+box-sizing: border-box;
+// height: 384px;
+width: 100%;
+}
+.skip_button{
+  text-decoration: none;
+  color: #505B65;
+  margin-right: 2%;
+cursor: pointer;
+  
+}
+.skip_outer_wrapper{
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+}
+.select_for_county{
+  min-width: 100px;
+  padding: 8% !important;
+}
+.details_title{
+    color: #113C4E;
+    margin-bottom: 2%;
+}
+::ng-deep .inside_stepper > .mat-horizontal-stepper-header-container {
+    display: none !important;
+}
+::ng-deep .inside_stepper > .mat-horizontal-content-container {
+    border: none;
+    padding: 0px !important;
+}
+.details_stepper_address_tab{
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  height: inherit;
+
+}
+
+.add-more-container {
+    width: 100px;
+    height: 100%;
+    min-height: 105px;
+    min-width: 20%;
+    // padding: 0px 15%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FFFFFF;
+    border: 1px solid #505B65;
+    box-sizing: border-box;
+  
+    .icon {
+      // position: absolute;
+    }
+    .text {
+      font-size: 16px;
+      padding-bottom: 16px;
+      text-align: center;
+      // align-self: flex-end;
+    }
+    .input {
+      display: none;
+    }
+  }
+  
+  .container {
+    flex:1;
+            color: #505B65;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            // margin: 2%;
+    }
+    .column {
+      // padding: 5%;
+      flex-direction: column;
+    }
+  .picture_label{
+    flex: 1;
+    height: 100%;
+    display: flex;
+  }
+    
+.img_container {
+  // width: 100px;
+  // display: flex;
+}
+.img_class {
+  width: 100%;
+  height: 100%;
+}
+.whole_images_wrapper{
+  display: flex;
+  
+}
+.single_image_wrapper{
+  margin: 2%;
+  width: 33%;
+}
+.WA_Header{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  /* font-size: 12px; */
+  /* line-height: 16px; */
+  color: #505B65;
+}
+
+
+::ng-deep .mat-select{
+  width: 95% !important;
+  border: 1px solid #505B65 !important;
+  padding: 2% !important;
+}
+::ng-deep .mat-select-value {
+  color: #505B65 !important;
+}
+::ng-deep .mat-option.mat-active {
+  background: #477596 !important;
+  color: #ffffff !important;
+}
+::ng-deep .mat-option {
+color: #3883C1 !important;
+}
+
+@media screen and (max-width: 768px) {
+  .whole_images_wrapper{
+    flex-direction: column;
+  }
+  .img_container{
+    width: auto;
+    display: flex;
+  }
+  .select_for_county{
+    min-width: 100px;
+    padding: 2% !important;
+  }
+  .single_image_wrapper{
+    width: auto;
+  }
+}

@@ -1,0 +1,90 @@
+.appointment{
+    display: flex;
+    flex-direction: column;
+}
+.first_line{
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+}
+.Single-date{
+    padding-top: 20px;
+}
+.Day_name{
+    font-weight: bold;
+}
+.timing-button{
+    margin-right: 5%;
+    display: flex;
+}
+.appointment_main_wrapper{
+    color: #505B65;
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+}
+.button{
+    border: 1px solid #505B65;
+    // background-color: #fff; 
+    color: #505B65;
+    width: auto;
+    min-width: 100px;
+    min-height: 30px;
+    height: auto;
+    margin-right: 10px;
+    outline: none;
+    font-size: 12px;
+    opacity: 0.8;
+}
+.noslots_text{
+    font-weight: bold;
+    justify-content: center;
+    display: flex;
+    margin-top: 10%;
+}
+.show_more{
+    color: #477596;
+    margin-top: 20px;
+}
+.more_appointments{
+    cursor: pointer;
+}
+.details_button_2{
+    width: 100px;
+    height: 30px;
+    background: rgba(17, 60, 78, 0.5);
+    // background-color: #113C4E;
+    color: #ffffff;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.spinner_in_appoint {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.button_wrapper_appoint{
+    display: flex;
+    height: inherit;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.service_button_appoint{
+    width: 100px;
+    height: 30px;
+    background: rgba(17, 60, 78, 0.5);
+    color: #ffffff;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+    }
+
+    @media screen and (max-height: 680px) { 
+
+        .button_wrapper_appoint{
+margin-bottom: 2vh;
+        }
+    }

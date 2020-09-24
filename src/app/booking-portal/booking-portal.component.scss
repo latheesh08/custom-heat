@@ -1,0 +1,456 @@
+.body{
+    width: 100%;
+    height: 100%;
+    display: flex;
+flex-direction: column;
+    background: #ffffff;
+}
+.book_button{
+    display: flex;
+    align-self: flex-end;
+    align-items: center;
+    margin-top: 20px;
+    margin-right: 20px;
+    background: #113C4E;
+border-radius: 5px;
+font-weight: 900;
+color: #ffffff;
+height: 40px;
+border: none;
+padding: 2%;
+cursor: pointer;
+}
+.app_heading{
+    font-weight: bold;
+    font-size: 16px;
+    color: #505B65;
+}
+.service_stepper{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    height: inherit;
+}
+.service_stepper_description{
+    color: #505B65;
+
+}
+.service_stepper_notes {
+    margin: 10px 0px;
+    font-size: 14px;
+line-height: 16px;
+color: #505B65;
+
+}
+.service_wrapper{
+color: #505B65;
+background: #FFFFFF;
+border: 1px solid #C4C4C4;
+box-sizing: border-box;
+margin-top: 2%;
+display: flex;
+flex-direction: row;
+align-items: center;
+width: 100%;
+}
+.service_icon{
+font-weight: 900;
+font-size: 20px;
+line-height: 23px;
+margin-right: 2%;
+}
+.dropdown_text{
+    display: flex;
+    align-items: center;
+    margin: 0px;
+}
+.service_text{
+font-size: 12px;
+line-height: 14px;
+margin: 0px;
+padding: 15px;
+}
+.service_button {
+width: 100px;
+height: 30px;
+background: rgba(17, 60, 78, 0.5);
+color: #ffffff;
+border: none;
+cursor: pointer;
+}
+
+.service_button_inSearch{
+position: absolute;
+bottom: 0;
+right: 0;
+width: 100px;
+height: 30px;
+background: rgba(17, 60, 78, 0.5);
+color: #ffffff;
+border: none;
+margin-top: 20px;
+cursor: pointer;
+}
+.cancel{
+    display: flex;
+    align-items: center;
+    height: 30px;
+    cursor: pointer;
+    color: #477596;
+}
+.service_button_newsearch{
+    width: 100px;
+    height: 30px;
+    background: #113C4E;
+    color: #ffffff;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.service_button_wrapper{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    height: inherit;
+    align-items: flex-end;
+    // margin-bottom: 2vh;
+}
+.service_button_wrapper_innotfound{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: inherit;
+    margin-bottom: 20px;
+}
+.icon_content_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.insearch_component{
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+}
+.button_wrapper_insearch{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: inherit;
+}
+::ng-deep .yellow-snackbar{
+    background-color: #FFEBB0;
+    color: #505b65;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+    padding: 5px 12px !important;
+   min-height: auto;
+   max-width: none;
+   font-weight: bold;
+   border-radius: 0;
+  }
+  ::ng-deep .mat-snack-bar-container{
+    min-width: auto;
+  }
+  .close_btn_snack{
+      border: none;
+      color: #3883c1;
+      transition: color 0.1s ease-in;
+      font-weight: bold;
+      background: none;
+      cursor: pointer;
+      outline:none
+  }
+.input_types , .input_type_search{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px;
+}
+.input_type_search{
+    width: 100%;
+    padding-right: 5%;
+}
+.noCustomerFound{
+    padding: 5% 0;
+}
+.searchForm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.service_input_title{
+    font-size: 12px;
+    line-height: 14px;
+    color: #505B65;
+}
+.service_inputs {
+height: 28px;
+opacity: 0.8;
+border: 1px solid #505B65;
+box-sizing: border-box;
+outline: none;
+padding: 0px 10px;
+}
+.service_search_inputs{
+    height: 35px;
+    opacity: 0.8;
+    border: 1px solid #505B65;
+    box-sizing: border-box;
+    outline: none;
+    padding: 5px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+.newAddress_name_wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.cdk-overlay-pane{
+    max-width: 60vw !important;
+}
+.required_mark{
+    margin-left: 3px;
+    color: red;
+}
+
+// Details stepper
+
+.details_address{
+    background-color: #ffffff;
+    padding: 10px;
+    border: 1px solid #E0E0E0;
+    box-sizing: border-box;
+    font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+margin-bottom: 2%;
+color: #505B65;
+display: flex;
+flex-direction: row;
+}
+.icon_home{
+    margin-right: 2%;
+}
+.address_lines{
+    margin:0px;
+}
+.details_link{
+    color: #3883C1;
+    cursor: pointer;
+    margin-top: 1%;
+}
+.check_box{
+    margin-bottom: 5%;
+}
+.detail_select{
+    width: 100%;
+    height: 30px;
+    color: #505B65;
+}
+// select option:hover {
+//     box-shadow: 0 0 10px 100px #000 inset;
+// }
+.spinner_wrapper {
+    height: inherit;
+display: flex;
+}
+
+.customer_not_found_component{
+    height: inherit;
+    position: relative;
+}
+
+option:hover{
+
+    background-color: #000;
+
+}
+.app_heading_wrapper{
+    margin: 3vh 2vh 0px;
+    display: flex;
+    position: relative;
+}
+.close{
+    right: 0;
+    font-size: 16px;
+    cursor: pointer;
+    color: #477596;
+    position: absolute;
+}
+.appointments_component{
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+::ng-deep .mat-dialog-container{
+    padding: 0px !important;
+    max-width: none !important;
+}
+
+
+::ng-deep .mat-horizontal-stepper-header-container {
+    color: #505B65;
+    max-width: 100%;
+    height: auto !important;
+    margin: auto;
+}
+::ng-deep .mat-horizontal-stepper-header{
+    pointer-events: none !important;
+}
+::ng-deep .mat-horizontal-stepper-content{
+height: inherit;
+display: flex;
+flex-direction: column;
+}
+::ng-deep .mat-step-icon{
+    background: #C4C4C4 !important;
+}
+::ng-deep .mat-step-icon-selected{
+    background:  #477596 !important;
+}
+
+::ng-deep .mat-step-label{
+    color: #505B65 !important;
+    font-weight: normal !important;
+}
+::ng-deep .mat-horizontal-content-container{
+    background: #FAFAFA;
+    border-top: 1px solid #C9C9C9;
+    height: 62vh !important;
+    padding: 20px !important;
+    overflow: auto;
+}
+::ng-deep  .mat-dialog-content{
+    height: auto !important;
+    width: 40vw;
+    max-height: none !important;
+    padding: 0;
+    margin: 0;
+  }
+
+  ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    opacity: 0.03 !important;
+    background-color: #005691!important;
+  }
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #005691;
+  }
+
+  ::ng-deep .form_in_service > .mat-select {
+width: -webkit-fill-available !important;
+color: #505B65 !important;
+background: #FFFFFF !important;
+border: 1px solid #C4C4C4 !important;
+flex-direction: column;
+
+}
+::ng-deep .form_in_service > .mat-select-trigger , .mat-select-value {
+    margin: 2% !important;
+}
+::ng-deep .mat-select{
+    width: 95% !important;
+    border: 1px solid #505B65 !important;
+    padding: 2% !important;
+  }
+  ::ng-deep .mat-select-value {
+    color: #505B65 !important;
+  }
+  ::ng-deep .mat-option.mat-active {
+    background: #477596 !important;
+    color: #ffffff !important;
+  }
+  ::ng-deep .mat-option {
+  color: #3883C1 !important;
+  }
+// confirmation css
+.Booked_container{
+    // padding: 50px 30px;
+}
+.Check_Wrapper , .Close_Wrapper{
+    display: flex;
+    justify-content: center;
+}
+.icon_check{
+    border: 1px solid #CACACA;
+    box-sizing: border-box;
+    border-radius: 50%;
+    font-size: 70px;
+    color: #0B8827;
+    width: 100px;
+    height: 100px;
+    font-size: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Booked_inner_container {
+    background: #FFFFFF;
+    border: 1px solid #CACACA;
+    box-sizing: border-box;
+    padding: 50px 10px 20px;
+    margin-top: -25px;
+    color: #505B65
+}
+.Booked_msg{
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 20px;
+}
+.Booked_title{
+    font-weight: bold;
+}
+.job_address{
+    font-size: 12px;
+    line-height: 14px;
+}
+.con_job_title{
+font-weight: bold;
+    
+}
+
+
+.select_in_notFound , .select_in_notFound_WA{
+    padding: 8px !important;
+}
+.input_types_title {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px;
+}
+.invalid-feedback{
+    padding-top: 1%;
+    color:red;
+}
+
+@media screen and (max-width: 768px) {
+    ::ng-deep .mat-horizontal-content-container{
+    height: 66vh !important;
+    padding: 2vh !important;
+    }
+    .newAddress_name_wrapper{
+        flex-direction: column;
+    }
+    .input_types_title {
+        width: auto !important;
+    }
+    .select_in_notFound , .select_in_notFound_WA{
+        padding: 2% !important;
+    }
+}
+@media screen and (max-width: 1024px) { 
+    ::ng-deep  .mat-dialog-content{
+        width: 60vw !important;
+    }
+}
+@media screen and (max-width: 430px) { 
+    ::ng-deep  .mat-dialog-content{
+        width: 90vw !important;
+    }
+}
+
+::ng-deep .mat-step-header{
+    background: none !important; 
+ }

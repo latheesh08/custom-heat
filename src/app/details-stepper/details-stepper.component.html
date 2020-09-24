@@ -1,0 +1,256 @@
+<mat-horizontal-stepper class="inside_stepper" labelPosition="bottom" #stepper [selectedIndex]="selectedStep ? 1 : 0">
+  <mat-step>
+    <div class="details_stepper_address_tab" >
+      <div *ngFor='let Add of CustomerAddresses' (click) = "AddressSelect(Add.cid)" class="details_address" [ngStyle]="{'border' : Add.isSelected  ? '2px solid #113C4E' : '1px solid #E0E0E0'}" >
+        <fa-icon class="icon_home" [icon]="['fas', 'home']"></fa-icon>
+        <div>
+          <p class="address_lines">{{Add.cus_name}} </p>
+          <p class="address_lines">{{Add.cus_address}} </p>
+          <p class="address_lines">{{Add.cus_country}} </p>
+          <p class="address_lines" >{{Add.cus_postcode}}</p>
+        </div>
+      </div>
+      <p class="details_link" (click) = 'noBillingAddres()'>This is not my billing address</p>
+    <div class="service_button_wrapper"><button (click)="AfterSelectingaddress()"  class="details_button_2" >Next</button></div> 
+    </div> 
+    
+  </mat-step>
+  <mat-step>
+    <div *ngIf='isInnerLoad' class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+      <div class="details_stepper_address_tab" *ngIf='!isInnerLoad'>
+        <p>Your billing address</p>
+        <!-- <div *ngiF = 'BillingAddress !== null' > -->
+          <div  *ngFor='let Add of BillingAddress' class="details_address" >
+            <fa-icon class="icon_home" [icon]="['fas', 'home']"></fa-icon>
+            <div>
+              <p class="address_lines">{{Add.cus_name}} </p>
+              <p class="address_lines">{{Add.cus_address}} </p>
+              <p class="address_lines">{{Add.cus_country}} </p>
+              <p class="address_lines" >{{Add.cus_postcode}}</p>
+            </div>
+          </div>
+        <!-- </div> -->
+
+        <p class="details_link" (click) = 'noBillingAddres()'>This is not my billing address</p>
+      <!-- check box for found -->
+        <div class="check_box" ><mat-checkbox [checked]="isBillingandJobSame" (change)="check_toggle()">The job address is the same as the billing address</mat-checkbox></div> 
+      
+<!-- common dropdown for found and not found -->
+      <div *ngIf = '!isBillingandJobSame && !isNewWorkAddress' class="job_address">
+        <p class="service_input_title">Job address<span class="required_mark">*</span></p> 
+
+         <mat-select [formControl] = 'detailForm' placeholder="{{workAdd_placeholder}}" >
+          <mat-select-trigger>         
+              <fa-icon class="icon_home" [icon]="['fas', 'home']"></fa-icon> {{detailForm.value ? detailForm.value.address : ""}}
+          </mat-select-trigger> 
+          <mat-option *ngFor="let Add of WorkAddresses" [value]="Add">
+            <fa-icon class="icon_home" [icon]="['fas', 'home']"></fa-icon>{{ Add.address }}
+          </mat-option>
+        </mat-select>
+        
+        <p class="details_link" (click) = 'workAddressNotFound()' >Enter work address manually</p> 
+
+      </div>
+
+            
+      <form [formGroup]="newJobAddress" *ngIf='!isBillingandJobSame && isNewWorkAddress'>
+        <P class="details_link" (click) = 'workAddressNotFound()'>Search in addresses</P>
+        <div [ngStyle]="{'margin-bottom' : '5px'}"> 
+          <AutocompleteComponent (setAddress)="getAddress($event)" adressType="geocode"></AutocompleteComponent>
+        </div>
+        <p class="WA_Header">The job sites contact details</p>
+        <div class="newAddress_name_wrapper">
+           <label class="input_types_title">
+            <p class="service_input_title">Title</p> 
+            <mat-select class="select_in_notFound_WA" formControlName="title" >
+              <mat-option *ngFor="let title of Titles" [value]="title">
+                  {{ title.title }}
+              </mat-option>
+            </mat-select>
+          </label>
+           <label class="input_types">
+            <p class="service_input_title">Name</p> 
+             <input class="service_inputs" formControlName="firstName" type="text" >
+           </label>
+           <label class="input_types">
+            <p class="service_input_title">Surname<span class="required_mark">*</span></p> 
+             <input class="service_inputs" formControlName="surName" type="text" >
+             <div *ngIf="submitted_new_WA && f.surName.errors" class="invalid-feedback">
+              <div *ngIf="f.surName.errors.required">Surname is required</div>
+          </div>
+           </label>
+        </div>
+        <label class="input_types">
+          <p class="service_input_title">Mobile<span class="required_mark">*</span></p> 
+           <input class="service_inputs" formControlName="MobileNumber" type="text" >
+           <div *ngIf="submitted_new_WA && f.MobileNumber.errors" class="invalid-feedback">
+            <div *ngIf="f.MobileNumber.errors.required">Mobile Number is required</div>
+        </div>
+         </label>
+         <label class="input_types">
+          <p class="service_input_title">Email Id<span class="required_mark">*</span></p>
+          <input class="service_inputs" formControlName="EmailId" type="text">
+          <div *ngIf="submitted_new_WA && f.EmailId.errors" class="invalid-feedback">
+            <div *ngIf="f.EmailId.errors.required">Email Id is required</div>
+          </div>
+        </label>
+         <label class="input_types">
+          <p class="service_input_title">Address line 1<span class="required_mark">*</span></p> 
+           <input class="service_inputs" formControlName="Address1" type="text" >
+           <div *ngIf="submitted_new_WA && f.Address1.errors" class="invalid-feedback">
+            <div *ngIf="f.Address1.errors.required">Address is required</div>
+        </div>
+         </label>
+         <label class="input_types">
+          <p class="service_input_title">Address line 2</p> 
+           <input class="service_inputs" formControlName="Address2" type="text" >
+         </label>
+         <label class="input_types">
+          <p class="service_input_title">Address line 3</p> 
+           <input class="service_inputs" formControlName="Address3" type="text" >
+         </label>
+         <div class="newAddress_name_wrapper">
+          <label class="input_types">
+            <p class="service_input_title">Town</p> 
+             <input class="service_inputs" formControlName="Town" type="text" >
+           </label>
+          <label class="input_types">
+           <p class="service_input_title">County</p> 
+            <!-- <input class="service_inputs" formControlName="County" type="text" > -->
+            <mat-select class="select_for_county" formControlName="County">
+              <mat-option *ngFor="let title of county" [value]="title">
+                {{ title }}
+              </mat-option>
+            </mat-select>
+          </label>
+          <label class="input_types">
+           <p class="service_input_title">Postcode<span class="required_mark">*</span></p> 
+            <input class="service_inputs" formControlName="Postcode" type="text" >
+            <div *ngIf="submitted_new_WA && f.Postcode.errors" class="invalid-feedback">
+             <div *ngIf="f.Postcode.errors.required">Postcode is required</div>
+         </div>
+          </label>
+       </div>
+      </form>
+
+
+      <div class="service_button_wrapper"><button (click)="details_button_first()"  class="service_button" [ngStyle]="{'background-color' : this.isBillingandJobSame || !this.newJobAddress.invalid ||(detailForm.value !== null && detailForm.value.address !== '')  ? '#113C4E' : 'rgba(17, 60, 78, 0.5)' , 'cursor': this.isBillingandJobSame || !this.newJobAddress.invalid ||(detailForm.value !== null && detailForm.value.address !== '')  ? 'pointer' : 'auto' }" >Next</button></div> 
+    </div> 
+
+    </mat-step>
+    <mat-step >
+      <div class="details_stepper_address_tab">
+      <div class="details_title">The price of this service is: {{price}}</div>
+      <div class="service_button_wrapper">
+      <button (click)="details_button_second()"  class="details_button_2" >Next</button>
+    </div> 
+  </div>
+    </mat-step>
+    <mat-step >
+      <div class="details_stepper_address_tab">
+      <div class="details_title">Can you send us some photos/video of the issue?</div>
+      <div class="whole_images_wrapper">
+        <div class="single_image_wrapper">
+        <div *ngIf="firstImage == null" class="add-more-container">
+          <input
+            class="input"
+            id="add-more-button-file"
+            type="file"
+            multiple
+            (change)="onSelectFile($event , 'first')"
+          />
+          <label disabled = true for="add-more-button-file" class='picture_label'>
+            <div class="container column" >
+              <fa-icon class="service_icon" [icon]="['fas', 'camera']"></fa-icon>
+            </div>
+          </label>
+        </div>
+        <div *ngIf="firstImage !== null" class="img_container">
+          <img class="img_class"  [src]="getDataUrl(firstImage)" alt="not found" />
+        </div>
+      </div>
+      <div class="single_image_wrapper">
+        <div *ngIf="secondImage == null" class="add-more-container">
+          <input
+            class="input"
+            id="add-more-button-file"
+            type="file"
+            multiple
+            (change)="onSelectFile($event , 'second')"
+          />
+          <label disabled = true for="add-more-button-file" class='picture_label'>
+            <div class="container column" >
+              <fa-icon class="service_icon" [icon]="['fas', 'camera']"></fa-icon>
+            </div>
+          </label>
+        </div>
+        <div *ngIf="secondImage !== null" class="img_container">
+          <img class="img_class"  [src]="getDataUrl(secondImage)" alt="not found" />
+        </div>
+      </div>
+      <div class="single_image_wrapper">
+        <div *ngIf="thirdImage == null" class="add-more-container">
+          <input
+            class="input"
+            id="add-more-button-file"
+            type="file"
+            multiple
+            (change)="onSelectFile($event , 'third')"
+          />
+          <label disabled = true for="add-more-button-file" class='picture_label'>
+            <div class="container column" >
+              <fa-icon class="service_icon" [icon]="['fas', 'camera']"></fa-icon>
+            </div>
+          </label>
+        </div>
+        <div *ngIf="thirdImage !== null" class="img_container">
+          <img class="img_class"  [src]="getDataUrl(thirdImage)" alt="not found" />
+        </div>
+      </div>
+
+      </div>
+      <div class="service_button_wrapper"><div class="skip_outer_wrapper"><a class="skip_button" (click)="skip_fun()" >Skip this step</a> <button (click)="details_button_second()"  class="details_button_2" >Next</button></div></div> 
+</div>
+    </mat-step>
+    <!-- questions section -->
+    <!-- <mat-step >
+      <form [formGroup]="questionsForm">
+        <label class="input_types">
+          <p class="service_input_title">Question 1</p> 
+           <input class="service_inputs" formControlName="Question_1" type="text" >
+         </label>
+         <label class="input_types">
+          <p class="service_input_title">Question 2</p> 
+           <input class="service_inputs" formControlName="Question_2" type="text" >
+         </label>
+         <label class="input_types">
+          <p class="service_input_title">Question 3</p> 
+           <input class="service_inputs" formControlName="Question_3" type="text" >
+         </label>
+         <label class="input_types">
+          <p class="service_input_title">Question 4</p> 
+           <input class="service_inputs" formControlName="Question_4" type="text" >
+         </label>
+      </form>
+
+      <div class="service_button_wrapper"><button (click)="details_button_second()"  class="details_button_2" >Next</button></div> 
+
+    </mat-step> -->
+    <mat-step>
+      <div *ngIf='isInnerLoad' class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
+
+      <div class="details_stepper_address_tab" *ngIf='!isInnerLoad'>
+      <div class="details_title">Tell us more about your issue</div>
+      <textarea [formControl] = 'notes' matInput rows="15" class="description_area"></textarea>
+      <div class="service_button_wrapper"><div class="skip_outer_wrapper"> <a class="skip_button" (click)="details_final_button()" >Skip this step</a> <button (click)="details_final_button()"  class="details_button_2" >Next</button></div></div> 
+</div>
+    </mat-step>
+  </mat-horizontal-stepper>

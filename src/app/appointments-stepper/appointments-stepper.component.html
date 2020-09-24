@@ -1,0 +1,44 @@
+<div  *ngIf='!isWholeLoading'  class="appointment_main_wrapper">
+    <div class="appointment">
+        <p class="first_line">Book the appointment</p>
+        <p class="second_line">Click on a suitable date/time</p>
+      </div>
+      <div *ngIf='isLoaded && !noSlots'>
+
+      
+      <div *ngFor='let obj of finalResult' class="Single-date">
+        <p *ngIf='obj.times.length > 0' class="Day_name">{{obj.Day}} </p>
+        <div *ngIf='obj.times.length > 0' class="timing-button">
+          <div *ngFor='let button of obj.times'>
+            <button class="button" (click)="callFunction(button+'_'+obj.key)"
+              [ngStyle]="{'background-color': this.AvailableButtons[button+'_'+obj.key] ? '#477596' : '#fff' , 'color' : this.AvailableButtons[button+'_'+obj.key] ? '#fff' : '#505B65'}">
+              {{button}} </button>
+          </div>
+        </div>
+      </div>
+      <div class="show_more">
+        <a class="more_appointments" (click) = "SuggestedAppointement(3, nextFour+4)">show more appointments</a>
+        </div>
+    </div>
+    <div *ngIf = 'noSlots' class="noslots_text">
+      <p>No slots available at the moment</p>
+    </div>
+    <div class="spinner_in_appoint">
+      <div *ngIf='!isLoaded' class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>
+    </div>
+<div class="button_wrapper_appoint">
+  <button (click)="BookDiaryEvent()" [disabled] = "!isAppointmentSelected" [ngStyle]="{'background-color' : this.isAppointmentSelected  ? '#113C4E' : 'rgba(17, 60, 78, 0.5)' , 'cursor': this.isAppointmentSelected ? 'pointer' : 'auto' }" class="service_button_appoint" >Next</button>
+
+</div>
+</div>
+
+
+<div *ngIf='isWholeLoading' class="spinner">
+  <div class="bounce1"></div>
+  <div class="bounce2"></div>
+  <div class="bounce3"></div>
+</div>

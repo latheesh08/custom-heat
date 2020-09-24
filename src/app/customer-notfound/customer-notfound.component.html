@@ -1,0 +1,101 @@
+<div class="spinner_wrap_in_notFound">
+  <div *ngIf='!isLoaded' class="spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+</div>
+
+
+<div *ngIf='isLoaded' class="notfound_wrapper">
+  <!-- <div [ngStyle]="{'margin-bottom' : '5px'}"> 
+    <AutocompleteComponent (setAddress)="getAddress($event)" adressType="geocode"></AutocompleteComponent>
+  </div> -->
+<p>
+  Job address <span class="required_mark">*</span>
+</p>
+<form [formGroup]="newAddressForm">
+  <div class="newAddress_name_wrapper">
+    <label class="input_types_title">
+      <p class="service_input_title">Title</p>
+      <mat-select class="select_in_notFound" formControlName="Title">
+        <mat-option *ngFor="let title of Titles" [value]="title">
+          {{ title.title }}
+        </mat-option>
+      </mat-select>
+    </label>
+    <!-- <label class="input_types">
+        <p class="service_input_title">Title<span class="required_mark">*</span></p> 
+         <input class="service_inputs" formControlName="Title" type="text" >
+       </label> -->
+    <label class="input_types">
+      <p class="service_input_title">Name</p>
+      <input class="service_inputs" formControlName="Name" type="text">
+    </label>
+    <label class="input_types">
+      <p class="service_input_title">Surname<span class="required_mark">*</span></p>
+      <input class="service_inputs" formControlName="SurName" type="text">
+      <div *ngIf="submitted && f.SurName.errors" class="invalid-feedback">
+        <div *ngIf="f.SurName.errors.required">Surname is required</div>
+      </div>
+    </label>
+  </div>
+  <label class="input_types">
+    <p class="service_input_title">Mobile<span class="required_mark">*</span></p>
+    <input class="service_inputs" formControlName="MobileNumber" type="text">
+    <div *ngIf="submitted && f.MobileNumber.errors" class="invalid-feedback">
+      <div *ngIf="f.MobileNumber.errors.required">Mobile Number is required</div>
+    </div>
+  </label>
+  <label class="input_types">
+    <p class="service_input_title">Email Id<span class="required_mark">*</span></p>
+    <input class="service_inputs" formControlName="EmailId" type="text">
+    <div *ngIf="submitted && f.EmailId.errors" class="invalid-feedback">
+      <div *ngIf="f.EmailId.errors.required">Email Id is required</div>
+    </div>
+  </label>
+  <label class="input_types">
+    <p class="service_input_title">Address line 1<span class="required_mark">*</span></p>
+    <input class="service_inputs" formControlName="Address1" type="text">
+    <div *ngIf="submitted && f.Address1.errors" class="invalid-feedback">
+      <div *ngIf="f.Address1.errors.required">Address is required</div>
+    </div>
+  </label>
+  <label class="input_types">
+    <p class="service_input_title">Address line 2</p>
+    <input class="service_inputs" formControlName="Address2" type="text">
+  </label>
+  <label class="input_types">
+    <p class="service_input_title">Address line 3</p>
+    <input class="service_inputs" formControlName="Address3" type="text">
+  </label>
+  <div class="newAddress_name_wrapper">
+  <label class="input_types">
+    <p class="service_input_title">Town</p> 
+     <input class="service_inputs" formControlName="Town" type="text" >
+   </label>
+  <label class="input_types">
+   <p class="service_input_title">County</p> 
+    <!-- <input class="service_inputs" formControlName="County" type="text" > -->
+    <mat-select class="select_for_county" formControlName="County">
+      <mat-option *ngFor="let title of county" [value]="title">
+        {{ title }}
+      </mat-option>
+    </mat-select>
+  </label>
+  <label class="input_types">
+   <p class="service_input_title">Postcode<span class="required_mark">*</span></p> 
+    <input class="service_inputs" formControlName="Postcode" type="text" >
+    <div *ngIf="submitted && f.Postcode.errors" class="invalid-feedback">
+      <div *ngIf="f.Postcode.errors.required">Postcode is required</div>
+    </div>
+
+  </label>
+</div>
+</form>
+<!-- <div class="check_box" ><mat-checkbox [checked]="isBillingandJobSame" (change)="check_toggle()">The job address is the same as the billing address</mat-checkbox></div>  -->
+
+<div class="service_button_wrapper_innotfound">
+  <a class="cancel" (click)="this.backFun.emit()">Cancel</a>
+  <button (click)="secondNext()" class="service_button" [ngStyle]="{'background-color' : !this.newAddressForm.invalid ? '#113C4E' : 'rgba(17, 60, 78, 0.5)' , 'cursor': !this.newAddressForm.invalid ? 'pointer' : 'auto' }" >Next</button></div>
+</div>

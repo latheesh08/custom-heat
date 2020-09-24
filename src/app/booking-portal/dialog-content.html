@@ -1,0 +1,122 @@
+<mat-icon class="close_new" (click)="onClose()" >cancel</mat-icon>
+<mat-dialog-content>
+<div class="app_heading_wrapper"> <p class="app_heading">Booking Form</p></div>
+<mat-horizontal-stepper labelPosition="bottom" linear  #stepper  >
+<mat-step [stepControl]="serviceForm" completed="false">
+  <ng-template matStepLabel>Service</ng-template>
+  <div *ngIf='!isloader'  class="service_stepper">
+    <div class="service_stepper_description"><p>What are you looking for?</p></div>
+    <form [formGroup]="serviceForm" class="form_in_service">
+      <div *ngIf = 'isServiceList'>
+        <div class="available_services" *ngFor='let Service of Services'>
+          <button class="service_wrapper" (click)='serviceSelection(Service.service)' [ngStyle]="{'background-color': this.Service.selected ? '#477596' : '#fff' , 'color' : this.Service.selected ? '#fff' : '#505B65'}" >
+            <fa-icon class="service_icon" [icon]="['fas', 'tools']"></fa-icon>  <p class="service_text">{{Service.service}}</p>
+          </button>
+        </div>
+      </div>
+
+
+      <mat-select *ngIf = '!isServiceList' [formControl] ='selectedService' placeholder="Choose your service" >
+        <mat-select-trigger>         
+        <fa-icon class="service_icon"  [icon]="['fas', 'tools']"></fa-icon> {{selectedService.value ? selectedService.value.service : ""}}
+        </mat-select-trigger> 
+        <mat-option *ngFor='let Service of Services' [value]="Service">
+          <fa-icon [icon]="['fas', 'tools']"></fa-icon> {{ Service.service }} 
+        </mat-option>
+      </mat-select>
+
+
+      <label class="input_types">
+        <p class="service_input_title">Your email address<span class="required_mark">*</span></p> 
+         <input class="service_inputs" formControlName="emailAddress" type="text" >
+         <div *ngIf="submitted && f.emailAddress.errors" class="invalid-feedback">
+          <div *ngIf="f.emailAddress.errors.required">Email is required</div>
+          <div *ngIf="f.emailAddress.errors.email">Email must be a valid email address</div>
+      </div>
+       </label>
+       <label class="input_types">
+        <p class="service_input_title">Telephone number<span class="required_mark">*</span></p> 
+         <input class="service_inputs" formControlName="phoneNumber" type="text" >
+         <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+          <div *ngIf="f.phoneNumber.errors.required">Telephone number is required</div>
+      </div>
+       </label>
+     <p class="service_stepper_notes">
+      Please provide your email address and telephone number and we’ll see if we have
+      your details in our database. If you’ve not worked with us before, don’t worry, we’ll
+      give you the opporuntity to add in your details in a moment.
+     </p> 
+  </form>
+  <!-- <div class="service_button_wrapper"><button (click)="getCustomerDetails()" class="service_button" [ngStyle]="{'background-color' : '#113C4E' , 'cursor': 'pointer' }" >Next</button></div> -->
+
+  <div *ngIf = '!isServiceList' class="service_button_wrapper"><button (click)="getCustomerDetails()" [disabled] = '!selectedService.value' class="service_button" [ngStyle]="{'background-color' : (this.selectedService.value)  ? '#113C4E' : 'rgba(17, 60, 78, 0.5)' , 'cursor': (this.selectedService.value) ? 'pointer' : 'auto' }" >Next</button></div>
+  <div *ngIf = 'isServiceList' class="service_button_wrapper"><button (click)="getCustomerDetails()" [disabled] = '!isServiceSelected' class="service_button" [ngStyle]="{'background-color' : (isServiceSelected)  ? '#113C4E' : 'rgba(17, 60, 78, 0.5)' , 'cursor': (isServiceSelected) ? 'pointer' : 'auto' }" >Next</button></div>
+  
+</div>
+
+  <!-- loader -->
+  <!-- <div class="spinner_wrapper"> -->
+  <div *ngIf='isloader' class="spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+<!-- </div> -->
+</mat-step>
+<mat-step class="details_main_wrapper">
+  <ng-template matStepLabel>Details</ng-template>
+  <!-- <div [hidden] = 'true' *ngIf='!CusNotFound_By_intital'> -->
+  <div [hidden] = 'CusNotFound_By_intital'>
+
+    <app-details-stepper class="appointments_component" [data] = 'data' (parentFun)='returnfromdetailstepper()' (notBill)='notBillingAdd()' ></app-details-stepper>
+  </div>
+
+<div [hidden] = '!CusNotFound_By_intital' [ngStyle]="{'height' : 'inherit'}">
+  <div *ngIf = '!isNewCustomer' class="insearch_component">
+    <AutocompleteComponent (setAddress)="getAddress($event)" adressType="geocode"></AutocompleteComponent>
+  <p class="details_link" (click) = 'enterAddNormally()' >Enter in address manually</p> 
+  <div *ngIf='isloader_in_search' class="spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+  </div>
+  <div class="button_wrapper_insearch">
+    <a class="cancel" (click)="cancel()">Cancel</a>
+    <button (click)="newCusFromSearch()" class="service_button_newsearch" >Next</button>
+  </div>
+  </div>
+
+  <app-customer-notfound [hidden] = '!isNewCustomer' [data] = 'data' (backFun)='newAddress()' (nextFun) = 'proceedWithNewCus($event)' ></app-customer-notfound>
+</div> 
+
+
+</mat-step>
+<mat-step>
+  <ng-template matStepLabel>Book a timeslot</ng-template>
+<app-appointments-stepper class="appointments_component" [data] = 'data' (parentFun)='parentFun($event)' ></app-appointments-stepper>
+</mat-step>
+<!-- <mat-step>
+  <ng-template matStepLabel>Payment</ng-template>
+  <p>Fourth</p>
+  <button (click)="complete()"  class="service_button" >Next</button>
+</mat-step> -->
+<mat-step>
+  <ng-template matStepLabel>Confirmation</ng-template>
+  <div class="Booked_container">
+    <div class="Check_Wrapper">
+      <fa-icon class="icon_check" [icon]="['fas', 'check']"></fa-icon>
+    </div>
+    <div class="Booked_inner_container">
+      <div class="Booked_msg">
+        <p class="Booked_title">Confirmation of your booking</p>
+        <p>Your appointment has been booked for {{bookedDate}} {{BookedTime}}</p>
+      </div>
+      <div *ngIf = 'data.selectedJob !== undefined' class="job_address">
+        <p class="con_job_title">{{data.selectedJob.service}}</p>
+        <p class="con_job_address"><fa-icon class="icon_home" [icon]="['fas', 'home']"></fa-icon>{{BookedAddress}}</p>
+      </div>
+  </div>
+  </div>
+</mat-step>
+</mat-horizontal-stepper>
+</mat-dialog-content>
